@@ -43,12 +43,15 @@ export default function Navbar() {
                     {/* Logo */}
                     <Link href="/" className="flex items-center group">
                         <div className="relative h-12 w-40">
-                            <Image
-                                src="/logo.png"
-                                alt="ScaleX Logo"
-                                fill
-                                className="object-contain"
-                            />
+                            {mounted && (
+                                <Image
+                                    src={theme === 'dark' ? '/logo_dark.png' : '/logo.png'}
+                                    alt="ScaleX Logo"
+                                    fill
+                                    className="object-contain"
+                                    priority
+                                />
+                            )}
                         </div>
                     </Link>
 

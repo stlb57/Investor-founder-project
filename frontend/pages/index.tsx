@@ -32,12 +32,12 @@ export default function Home() {
             </div>
 
             <h1 className="text-6xl md:text-7xl font-bold text-slate-900 dark:text-white mb-8 tracking-tight leading-tight animate-slide-up">
-              Find Signal in the <br /> <GradientText>Noise</GradientText>
+              Fund What <br /> <GradientText>Matters</GradientText>
             </h1>
 
             <p className="text-xl text-slate-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.1s' }}>
-              AI decision support that connects investors with execution-ready startups.
-              Bias-aware, explainable, focused on <span className="text-slate-900 dark:text-white font-medium">progress over pedigree</span>.
+              Execution-first intelligence for high-conviction deal flow.
+              Beyond the warm intro, focused on <span className="text-slate-900 dark:text-white font-medium">real traction signals</span>.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
