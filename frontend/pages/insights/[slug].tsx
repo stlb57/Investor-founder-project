@@ -37,15 +37,49 @@ export default function InsightDetail() {
         }
     }, [slug])
 
-    const fetchStoryDetail = async () => {
-        try {
-            const response = await api.get(`/insights/${slug}`)
-            setStory(response.data)
-        } catch (error) {
-            console.error('Error fetching story:', error)
-        } finally {
-            setLoading(false)
+    // Mock data map
+    const mockContent: Record<string, StoryDetail> = {
+        'vertical-ai-healthcare-2024': {
+            id: '1', slug: 'vertical-ai-healthcare-2024',
+            title: 'The Rise of Vertical AI in Healthcare', type: 'ecosystem_insight',
+            summary: 'Why specialized models like DataScribe are outperforming generalized LLMs in clinical settings.',
+            content: [
+                { type: 'h3', text: 'The Limits of Generalized LLMs' },
+                { type: 'p', text: 'While GPT-4 and Claude 3 are incredibly powerful, they often hallucinate in high-stakes clinical environments. Vertical integration allows for grounding generation in specific medical ontologies.' },
+                { type: 'h3', text: 'Case Study: DataScribe' },
+                { type: 'p', text: 'DataScribe has reduced transcription errors by 40% compared to generic whisper-based solutions by fine-tuning on proprietary dataset of 1M+ clinical notes.' }
+            ],
+            related_tags: ['AI', 'Healthcare', 'Trends'], created_at: new Date().toISOString()
+        },
+        'fintech-infra-momentum': {
+            id: '2', slug: 'fintech-infra-momentum',
+            title: 'Market Momentum: Fintech Infrastructure', type: 'ecosystem_insight',
+            summary: 'Infrastructure plays like VaultX are seeing 3x higher deal flow than consumer fintech apps.',
+            content: [
+                { type: 'p', text: 'Investors are shifting focus from consumer apps (CAC is too high) to the rails that power them. B2B payments and compliance infrastructure are hot.' }
+            ],
+            related_tags: ['Fintech', 'Infrastructure'], created_at: new Date(Date.now() - 86400000 * 2).toISOString()
+        },
+        'decision-memo-visionary': {
+            id: '3', slug: 'decision-memo-visionary',
+            title: 'Decision Memo: Why We Passed on Visionary', type: 'decision_story',
+            summary: 'A deep dive into why execution speed matters more than the model.',
+            content: [
+                { type: 'p', text: 'Visionary has an impressive demo, but their go-to-market strategy relies heavily on PLG in a sales-led enterprise market. We need to see faster iteration cycles.' }
+            ],
+            related_tags: ['GenAI', 'Decision Memo'], created_at: new Date(Date.now() - 86400000 * 5).toISOString()
         }
+    }
+
+    const fetchStoryDetail = async () => {
+        // Simulate loading
+        if (slug && typeof slug === 'string' && mockContent[slug]) {
+            setStory(mockContent[slug])
+        } else {
+            // Fallback generic
+            setStory(mockContent['vertical-ai-healthcare-2024'])
+        }
+        setLoading(false)
     }
 
     if (loading) {

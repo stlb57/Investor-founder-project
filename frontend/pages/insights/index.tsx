@@ -18,13 +18,45 @@ interface Story {
 }
 
 export default function InsightsList() {
-    const [stories, setStories] = useState<Story[]>([])
-    const [loading, setLoading] = useState(true)
+    const mockStories: Story[] = [
+        {
+            id: '1',
+            slug: 'vertical-ai-healthcare-2024',
+            title: 'The Rise of Vertical AI in Healthcare',
+            type: 'ecosystem_insight',
+            summary: 'Why specialized models like DataScribe are outperforming generalized LLMs in clinical settings. Vertical integration allows for higher accuracy and better compliance.',
+            related_tags: ['AI', 'Healthcare', 'Trends'],
+            created_at: new Date().toISOString()
+        },
+        {
+            id: '2',
+            slug: 'fintech-infra-momentum',
+            title: 'Market Momentum: Fintech Infrastructure',
+            type: 'ecosystem_insight',
+            summary: 'Infrastructure plays like VaultX are seeing 3x higher deal flow than consumer fintech apps this quarter. Investors are fleeing to safety and recurring revenue.',
+            related_tags: ['Fintech', 'Infrastructure'],
+            created_at: new Date(Date.now() - 86400000 * 2).toISOString()
+        },
+        {
+            id: '3',
+            slug: 'decision-memo-visionary',
+            title: 'Decision Memo: Why We Passed on Visionary',
+            type: 'decision_story',
+            summary: 'A deep dive into the competitive landscape of generative video and why execution speed matters more than the model architecture in this specific vertical.',
+            related_tags: ['GenAI', 'Decision Memo'],
+            created_at: new Date(Date.now() - 86400000 * 5).toISOString()
+        }
+    ]
 
+    const [stories, setStories] = useState<Story[]>(mockStories)
+    const [loading, setLoading] = useState(false)
+
+    // Skip fetching from API for demo stability
     useEffect(() => {
-        fetchStories()
+        // Mock loading simulation if desired, or just instant
     }, [])
 
+    /* 
     const fetchStories = async () => {
         try {
             const response = await api.get('/insights')
@@ -34,7 +66,8 @@ export default function InsightsList() {
         } finally {
             setLoading(false)
         }
-    }
+    } 
+    */
 
     const getTypeColor = (type: string) => {
         switch (type) {
