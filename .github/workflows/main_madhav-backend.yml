@@ -31,11 +31,16 @@ jobs:
           source antenv/bin/activate
           pip install -r requirements.txt
                 
+      - name: Zip artifact for deployment
+        run: |
+          cd backend
+          zip -r ../python-app.zip .
+      
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: backend/
+          path: python-app.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,8 +54,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
-          path: backend
-      
+          
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -64,4 +68,4 @@ jobs:
         with:
           app-name: 'madhav-backend'
           slot-name: 'Production'
-          package: 'backend'
+          package: 'python-app.zip'
