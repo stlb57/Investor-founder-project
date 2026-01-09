@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useAuth } from '@/lib/auth-context'
+import { useTheme } from '@/lib/ThemeProvider'
 import { Button } from '@/components/ui/Button'
 import { ErrorBlock } from '@/components/ui/ErrorBlock'
 
@@ -11,8 +12,14 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   const { login } = useAuth()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -40,12 +47,14 @@ export default function Login() {
           <div className="bg-hero-glow bg-no-repeat bg-center opacity-30 absolute inset-0 animate-pulse-slow"></div>
           <div className="relative z-10 p-12 text-center max-w-lg">
             <div className="relative w-32 h-32 mx-auto mb-8">
-              <Image
-                src="/logo.png"
-                alt="ScaleX Logo"
-                fill
-                className="object-contain"
-              />
+              {mounted && (
+                <Image
+                  src={theme === 'dark' ? '/logo_dark.png' : '/logo.png'}
+                  alt="ScaleX Logo"
+                  fill
+                  className="object-contain"
+                />
+              )}
             </div>
             <h1 className="text-5xl font-bold mb-6 tracking-tight">
               Join the <span className="text-gradient">Future</span>
@@ -65,12 +74,14 @@ export default function Login() {
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
             <Link href="/" className="lg:hidden flex items-center gap-3 mb-8">
               <div className="relative w-10 h-10">
-                <Image
-                  src="/logo.png"
-                  alt="ScaleX Logo"
-                  fill
-                  className="object-contain"
-                />
+                {mounted && (
+                  <Image
+                    src={theme === 'dark' ? '/logo_dark.png' : '/logo.png'}
+                    alt="ScaleX Logo"
+                    fill
+                    className="object-contain"
+                  />
+                )}
               </div>
               <span className="text-xl font-bold text-slate-900 dark:text-white">ScaleX</span>
             </Link>
