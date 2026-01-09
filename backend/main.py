@@ -27,8 +27,16 @@ origins = [
     "http://localhost:3002",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
-    "http://127.0.0.1:3002"
+    "http://127.0.0.1:3002",
 ]
+
+# Add production domains from environment variable
+if os.getenv("ALLOWED_ORIGINS"):
+    origins.extend(os.getenv("ALLOWED_ORIGINS").split(","))
+
+# Allow Azure Static Web Apps (generic catch-all if needed)
+# For Imagine Cup demo simplicity, you might want to allow "*" temporarily if debugging CORS.
+# origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
