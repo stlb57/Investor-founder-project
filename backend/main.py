@@ -28,6 +28,7 @@ origins = [
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
     "http://127.0.0.1:3002",
+    "https://ambitious-bay-0d74b8a0f.azurestaticapps.net",
 ]
 
 # Add production domains from environment variable
